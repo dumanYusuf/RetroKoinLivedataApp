@@ -1,6 +1,7 @@
+package com.dumanyusuf.koinretrofit.presentation.get_filter_category.view
+
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,40 +28,46 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.dumanyusuf.koinretrofit.Screan
+import com.dumanyusuf.koinretrofit.domain.model.CategoryFilterModel
 import com.dumanyusuf.koinretrofit.domain.model.CategoryModel
 import com.dumanyusuf.koinretrofit.presentation.get_category.CategoryViewModel
-import com.google.gson.Gson
-import org.koin.androidx.compose.getViewModel
+import com.dumanyusuf.koinretrofit.presentation.get_filter_category.CategoryFilterViewModel
 import org.koin.androidx.compose.koinViewModel
-import java.net.URLEncoder
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CategoryPageView(
-   // viewModel: CategoryViewModel= koinViewModel()
-    controller: NavController
+fun CategoryFilterPageView(
+   // viewModel: CategoryFilterViewModel= koinViewModel(),
+    category:CategoryModel
 ) {
-    val viewModel: CategoryViewModel = koinViewModel()
-    val state =viewModel.state.observeAsState()
+
+    val viewModel: CategoryFilterViewModel = koinViewModel()
+    val state= viewModel.state.observeAsState()
+
+
+    LaunchedEffect(key1 = true) {
+       viewModel.getFilterCategory(category.strCategory)
+    }
+
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Yemek Kategorileri",
+                        text = category.strCategory,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSurface
@@ -74,7 +81,7 @@ fun CategoryPageView(
             )
         },
         content = { paddingValues ->
-            val categoryList = state?.value?.categoryList ?: emptyList()
+            val categoryList = state?.value?.myCategoryFilterList ?: emptyList()
 
             if (categoryList.isEmpty()) {
                 Box(
@@ -95,24 +102,21 @@ fun CategoryPageView(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     items(categoryList) { category ->
-                        CategoryItem(category,controller)
+                        CategoryItem(category)
                     }
                 }
             }
         }
     )
+
 }
 
 @Composable
-fun CategoryItem(category: CategoryModel,controller: NavController) {
+fun CategoryItem(category: CategoryFilterModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp).clickable {
-                val objectCategory= Gson().toJson(category)
-                val encodedJsonMeal = URLEncoder.encode(objectCategory, "UTF-8")
-                controller.navigate(Screan.CategoryFilterPageView.route+"/$encodedJsonMeal")
-            },
+            .height(120.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
@@ -126,8 +130,8 @@ fun CategoryItem(category: CategoryModel,controller: NavController) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = category.strCategoryThumb,
-                contentDescription = category.strCategory,
+                model = category.strMealThumb,
+                contentDescription = null,
                 modifier = Modifier
                     .size(80.dp)
                     .clip(CircleShape),
@@ -138,7 +142,7 @@ fun CategoryItem(category: CategoryModel,controller: NavController) {
 
             Column {
                 Text(
-                    text = category.strCategory ?: "Kategori Bulunamadı",
+                    text = category.strMeal ?: "Kategori Bulunamadı",
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -148,3 +152,4 @@ fun CategoryItem(category: CategoryModel,controller: NavController) {
         }
     }
 }
+
