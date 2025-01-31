@@ -1,3 +1,4 @@
+
 Bu uygulama, Clean Architecture prensiplerine uygun olarak tasarlanmış bir örnek API uygulamasıdır. Bu yapıda, Retrofit kütüphanesini kullanarak verileri ağ üzerinden alıp listeleme işlemleri gerçekleştirilmiştir. 
 Ayrıca, Koin kullanarak bağımlılıkları yönetim ve Use Case katmanı aracılığıyla Repository ve ViewModel arasındaki bağlantı sağlanmıştır.
 
@@ -20,3 +21,4 @@ Ayrıca bana apidan dönen verilerin hepsnini alıp(dto) paketin içerisinde ext
 Gelen verilerin isLoading,errormessage ve success olma durumlarına göre değerlendirdim. success olma durumunda listemi,isLoading durumunda CircularProgressIndicator ve olası bir hata durumunda errormessage olaylarınıda ele aldım.
 
 ![image alt](https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal1.png?raw=true)
+![image alt](https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal2.png?raw=true)
