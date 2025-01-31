@@ -22,8 +22,8 @@ Ayrıca bana apidan dönen verilerin hepsnini alıp(dto) paketin içerisinde ext
 Gelen verilerin isLoading,errormessage ve success olma durumlarına göre değerlendirdim. success olma durumunda listemi,isLoading durumunda CircularProgressIndicator ve olası bir hata durumunda errormessage olaylarınıda ele aldım.
 
 <div style="display: flex; justify-content: center; gap: 10px;">
-  <img src="https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal1.png?raw=true" alt="Meal 1" style="width: 200; height: auto; border-radius: 8px;">
-  <img src="https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal2.png?raw=true" alt="Meal 2" style="width: 200; height: auto; border-radius: 8px;">
-  <img src="https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal3.png?raw=true" alt="Meal 3" style="width: 200; height: auto; border-radius: 8px;">
+  <img src="https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal1.png?raw=true" alt="Meal 1" style="width: 150; height: auto; border-radius: 8px;">
+  <img src="https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal2.png?raw=true" alt="Meal 2" style="width: 150; height: auto; border-radius: 8px;">
+  <img src="https://github.com/dumanYusuf/RetroKoinLivedataApp/blob/master/meal3.png?raw=true" alt="Meal 3" style="width: 150; height: auto; border-radius: 8px;">
 </div>
 
